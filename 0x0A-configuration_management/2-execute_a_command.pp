@@ -1,5 +1,5 @@
-# kills a process called "killmenow"
-exec { 'killmenow':
+# Executes a bash command
+exec { 'kill':
   command => 'pkill -f killmenow',
-  path    => ['/usr/bin', '/usr/sbin', '/bin']
+  path    => ['/usr/bin', '/usr/sbin']
 }
