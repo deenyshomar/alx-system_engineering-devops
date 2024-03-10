@@ -34,5 +34,5 @@ echo "server {
     sudo systemctl reload nginx
 
     # Display a message indicating successful configuration
-    echo "Nginx configured for redirection. Access http://your_domain.com/redirect_me to see the redirection."
+    echo "Nginx configured for redirection. Access http://deenyshomar.tech redirect_me to see the redirection."
 
