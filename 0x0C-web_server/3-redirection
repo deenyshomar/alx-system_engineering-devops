@@ -1,11 +1,38 @@
-#!/usr/bin/env bash
-# Script that configures a new Ubuntu machine to respect above requirements
+#!/bin/bash
 
-sudo apt-get update
-sudo apt-get install -y nginx
+# Update package list
+sudo apt update
 
-echo "Hello World!" | sudo tee /var/www/html/index.html
-string_for_replacement="server_name _;\n\trewrite ^\/redirect_me http:\/\/www.deenyshomar.tech permanent;"
-sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+# Install Nginx
+sudo apt install -y nginx
 
-sudo service nginx restart
+# Start Nginx service
+sudo systemctl start nginx
+
+# Enable Nginx to start on boot
+sudo systemctl enable nginx
+
+# Create a configuration file for the redirection
+echo "server {
+    listen 80;
+        server_name deenyshomar.tech; # Replace with your actual domain or server IP
+
+	    location /redirect_me {
+	            return 301 http://deenyshomar.tech; # Replace with the actual destination URL
+		        }
+
+		    # Additional server configuration can be added here if needed
+	    }" | sudo tee /etc/nginx/sites-available/3-redirection
+
+    # Create a symbolic link to enable the site
+    sudo ln -s /etc/nginx/sites-available/3-redirection /etc/nginx/sites-enabled/
+
+    # Test Nginx configuration
+    sudo nginx -t
+
+    # Reload Nginx to apply changes
+    sudo systemctl reload nginx
+
+    # Display a message indicating successful configuration
+    echo "Nginx configured for redirection. Access http://your_domain.com/redirect_me to see the redirection."
+
