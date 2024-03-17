@@ -14,7 +14,7 @@ frontend  deenyshomar-frontend
         bind *:80
         mode http
         default_backend deenyshomar-backend
-backend ehoneah-backend
+backend deenyshomar-backend
         balance roundrobin
         server 175474-web-01 54.144.154.53:80 check
         server 175474-web-02 100.26.246.14:80 check
