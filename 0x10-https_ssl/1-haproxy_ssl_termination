@@ -7,6 +7,7 @@ global
         user haproxy
         group haproxy
         daemon
+	tune.ssl.default-dh-param 2048
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -40,4 +41,4 @@ frontend deenyshomar-frontend-https
 backend deenyshomar-backend
         balance roundrobin
         server 175474-web-01 54.144.154.53:80 check
-        server 175474-web-02 100.26.246.14:80 checkk
+        server 175474-web-02 100.26.246.14:80 check
